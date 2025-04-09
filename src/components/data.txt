@@ -1,0 +1,62 @@
+const resDetails = [
+    {
+        resName: "Pizza Hut",
+        rating: "4.1",
+        cuisines: ["Pizzas"],
+        location: "Karol Bagh"
+    },
+    {
+        resName: "McDonald's",
+        rating: "4.4",
+        cuisines: ["American", "Fast Food"],
+        location: "Rajendra Place"
+    },
+    {
+        resName: "Burger King",
+        rating: "4.3",
+        cuisines: ["Burgers", "American"],
+        location: "Shadipur"
+    },
+    {
+        resName: "Chinese Wok",
+        rating: "4.2",
+        cuisines: ["Chinese", "Asian", "Tibetan", "Desserts"],
+        location: "Kirti Nagar Metro"
+    },
+    {
+        resName: "Domino's Pizza",
+        rating: "4.4",
+        cuisines: ["Pizzas", "Italian", "Pastas", "Desserts"],
+        location: "Burari"
+    },
+    {
+        resName: "Subway",
+        rating: "4.4",
+        cuisines: ["Sandwich", "Salads", "Wrap", "Healthy Food"],
+        location: "Patel Nagar, Connaught Place"
+    },
+    {
+        resName: "Bikanervala",
+        rating: "4.6",
+        cuisines: ["Chinese", "North Indian", "South Indian", "Desserts", "Snacks", "Sweets"],
+        location: "Naraina"
+    },
+    {
+        resName: "KFC",
+        rating: "4.2",
+        cuisines: ["Fast Food"],
+        location: "Connaught Place"
+    },
+    {
+        resName: "Wow! Momo",
+        rating: "4.2",
+        cuisines: ["Tibetan", "Healthy Food", "Asian", "Chinese", "Snacks", "Continental", "Desserts", "Beverages"],
+        location: "Rajouri Garden"
+    },
+    {
+        resName: "Chaayos Chai+Snacks=Relax",
+        rating: "4.6",
+        cuisines: ["Beverages", "Chaat", "Snacks", "Bakery", "Street Food", "Healthy", "Home Food", "Maharashtrian", "Italian", "Desserts"],
+        location: "Paschim Vihar"
+    }
+];

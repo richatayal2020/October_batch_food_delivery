@@ -1,0 +1,46 @@
+.logo{
+    height: 100px; 
+    width: 100px;
+
+}
+
+.nav-bar{
+    margin-top: 20px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+
+}
+
+.list{
+    display: flex;
+    gap: 50px;
+    list-style: none;
+}
+
+.btn{
+    margin-left: 20px;
+}
+
+.div{
+    display: flex;
+}
+
+
+.resImage{
+    height: 200px ;
+    width:250px ;
+    border-radius: 5%;
+}
+.resCard{
+    border: 1px solid black;
+    height: 400px;
+    width: 250px;
+}
+
+.CardList{
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
