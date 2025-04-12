@@ -1,9 +1,14 @@
 
+import { Outlet } from 'react-router-dom'
 import './App.css'
 import Body from './components/Body'
 import { Counter } from './components/Counter'
 import { Footer } from './components/Footer'
 import Header from './components/Header'
+import  RestaurantMenu  from './components/RestaurantMenu'
+import { ResMenu } from './components/ResMenu'
+
+
 
 function App() {
 
@@ -11,10 +16,24 @@ function App() {
   return (
     <>
       <Header/>
-      <Body/>
-      <Footer/>
-      {/* <button onClick={() => {setState(!state)}}>Toggle</button> */}
-       {/* {state ? <Counter/> : ""} */}
+
+      {/* <Outlet/> */}
+
+      {/* <ResMenu/> */}
+
+      <RestaurantMenu/>
+
+
+      {/* if("/" ==> Body )
+        if("/about" ==> about )
+          if("/contact" ==> contact ) */}
+
+      {/* <Body/> */}
+      {/* <Footer/> */}
+      {/* <RestaurantMenu/> */}
+      
+
+      
     </>
   )
 }

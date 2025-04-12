@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { Link } from "react-router-dom";
 
 function Header () {
 
@@ -13,8 +13,8 @@ function Header () {
         <div className="div flex items-center">
           <ul className="list">
             <li> <a> Search </a></li>
-            <li> <a> ContactUs </a></li>
-            <li> <a> About </a></li>
+            <li> <Link to="/contact"> ContactUs </Link></li>
+            <li> <Link to="/about"> About </Link></li>
           </ul>
           <button className="border-2 border-slate-400 p-2 m-2 ml-3" onClick={()=>{
             seIsTrue(!isTrue)

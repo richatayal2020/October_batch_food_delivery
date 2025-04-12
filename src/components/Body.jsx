@@ -6,19 +6,23 @@ import { RestaurantCard } from "./RestaurantCard";
 function Body () {
    const [listOfRes , setListOfRes] = useState([])
    const[inputName , setInputName ] = useState("") ; 
+   const [allRestaurants, setAllRestaurants] = useState([]); //  ADD THIS
+
 
    useEffect(()=>{fetchData()} , [])
 
    const fetchData = async () => {
         const data = await fetch ("https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.615962&lng=77.060464&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING")
         const json = await data.json()
-        console.log(json.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
-        setListOfRes(json.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+        // console.log(json.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+        const restaurants = json.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants || []
+        setListOfRes(restaurants)
+        setAllRestaurants(restaurants) //  ADDED THIS 
     }
 
     const baseImageURL = "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/"
-   
     return ( 
+     listOfRes.length === 0 ? <h1 className="font-bold text-4xl">LOADING.....</h1> : 
     <>
         <div className="m-3 flex gap-3">
         <input className="p-2" type="text" placeholder="Search here..." onChange={(e) => 
@@ -26,22 +30,27 @@ function Body () {
             setInputName(e.target.value)
             }} />
         <button className="border-2 bg-slate-400 p-2" onClick={()=>{
-            const filteredList = listOfRes.filter(
-                (res) => res.resName.toLowerCase().includes(inputName.toLowerCase()) )
+            const filteredList = allRestaurants.filter((res) =>
+                res.info.name.toLowerCase().includes(inputName.toLowerCase()) //  FIXED LINE
+            )
             setListOfRes(filteredList)
         }} > Search </button>
+        
+        
+        
+        
         <button className="border-2 bg-slate-400 p-2"  onClick={()=>{
-          const updatedList =  listOfRes.filter((res)=> res.info.avgRating > 4.2 )
-            setListOfRes(updatedList) ;
+        const updatedList = allRestaurants.filter((res) => res.info.avgRating > 4.2) //  CHANGE THIS LINE
+        setListOfRes(updatedList)
         }} > Top rated Restaurants </button>
 
-</div>
+        </div>
        <div className="CardList">
-            {listOfRes.map((restaurant, index) => {
+            {listOfRes.map((restaurant) => {
                 const info = restaurant.info ;
                 return (
                 <RestaurantCard 
-                    key={index} 
+                    key={info.resId} 
                     imageAddress={baseImageURL + info.cloudinaryImageId}
                     name={info.name} 
                     rating={info.avgRating}
