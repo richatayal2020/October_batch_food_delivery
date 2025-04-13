@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { RestaurantCard } from "./RestaurantCard";
+import { Link } from "react-router-dom";
 // import {resDetails} from "../utils/info"
 
 
@@ -16,7 +17,9 @@ function Body () {
         const json = await data.json()
         // console.log(json.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
         const restaurants = json.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants || []
+        
         setListOfRes(restaurants)
+        // console.log(listOfRes.info)
         setAllRestaurants(restaurants) //  ADDED THIS 
     }
 
@@ -48,15 +51,18 @@ function Body () {
        <div className="CardList">
             {listOfRes.map((restaurant) => {
                 const info = restaurant.info ;
+                {/* {console.log(info.id)} */}
                 return (
-                <RestaurantCard 
-                    key={info.resId} 
+                    
+                    <Link to={`/restaurants/${info.id}`} key={info.id}> <RestaurantCard 
+                    key={info.id} 
                     imageAddress={baseImageURL + info.cloudinaryImageId}
                     name={info.name} 
                     rating={info.avgRating}
                     cuisines={info.cuisines}
                     location={ `${restaurant.info.locality} , ${restaurant.info.areaName}` }
                 />
+                </Link>  
                 )
                 })
             }
