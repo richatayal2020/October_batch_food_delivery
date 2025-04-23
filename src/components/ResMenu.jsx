@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+
+
 
 export const ResMenu = () => {
 
@@ -10,6 +12,11 @@ export const ResMenu = () => {
     const [resDetails, setResDetails] = useState({});
     const [itemCards, setItemCards] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    const handleAddToCart = () => {
+        
+    }
+
 
     useEffect(() => {
         console.log("Restaurant ID from URL:", resId);
@@ -34,15 +41,15 @@ export const ResMenu = () => {
 
             const itemList = json?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards;
                  setItemCards(itemList);
-                 console.log("cards:", json?.data?.cards);
-                 console.log("card[4]:", json?.data?.cards[4]);
-                 console.log("groupedCard:", json?.data?.cards[4]?.groupedCard);
-                 console.log("cardGroupMap:", json?.data?.cards[4]?.groupedCard?.cardGroupMap);
-                 console.log("REGULAR:", json?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR);
-                 console.log("cards[2]:", json?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]);
-                 console.log("itemCards:", json?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards);
-            console.log("itemList:", itemList);
-            console.log(itemList[0]?.card?.info?.name);
+            //      console.log("cards:", json?.data?.cards);
+            //      console.log("card[4]:", json?.data?.cards[4]);
+            //      console.log("groupedCard:", json?.data?.cards[4]?.groupedCard);
+            //      console.log("cardGroupMap:", json?.data?.cards[4]?.groupedCard?.cardGroupMap);
+            //      console.log("REGULAR:", json?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR);
+            //      console.log("cards[2]:", json?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]);
+            //      console.log("itemCards:", json?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards);
+            // console.log("itemList:", itemList);
+            // console.log(itemList[0]?.card?.info?.name);
 
             setLoading(false);
         }
@@ -85,7 +92,10 @@ export const ResMenu = () => {
                         <h5 className="text-lg font-medium text-gray-800">{info?.name}</h5>
                         <p className="text-sm text-gray-500">{info?.description}</p>
                         <p className="text-sm text-gray-600 font-semibold mt-2">{info?.price / 100} INR</p>
+                        <button onClick={handleAddToCart}>Add to cart</button>
                     </li>
+
+                    
                             );
                         })}
                     </ul>

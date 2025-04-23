@@ -15,6 +15,7 @@ function Header () {
             <li> <a> Search </a></li>
             <li> <Link to="/contact"> ContactUs </Link></li>
             <li> <Link to="/about"> About </Link></li>
+            <li> <Link to="/cart"></Link> Cart</li>
           </ul>
           <button className="border-2 border-slate-400 p-2 m-2 ml-3" onClick={()=>{
             seIsTrue(!isTrue)

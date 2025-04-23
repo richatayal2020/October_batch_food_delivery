@@ -15,3 +15,20 @@ export const RestaurantCard = (props) => {
         </div>
     );
 };
+
+// higer order component  = (resCard) =>
+
+
+    export const withPercentagediscount = () => {
+    return (props) => {
+        return (
+            <div>
+                <h1>Percentage discount : </h1>
+                <RestaurantCard {...props}/>
+            </div>
+        )
+    }
+}
+
+
+

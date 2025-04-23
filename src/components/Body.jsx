@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { RestaurantCard } from "./RestaurantCard";
+import { RestaurantCard  , withPercentagediscount} from './RestaurantCard'
 import { Link } from "react-router-dom";
 // import {resDetails} from "../utils/info"
 
@@ -9,8 +9,10 @@ function Body () {
    const[inputName , setInputName ] = useState("") ; 
    const [allRestaurants, setAllRestaurants] = useState([]); //  ADD THIS
 
-
+    console.log(listOfRes)
    useEffect(()=>{fetchData()} , [])
+
+   const ResCardWithPercentage = withPercentagediscount(RestaurantCard)
 
    const fetchData = async () => {
         const data = await fetch ("https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.615962&lng=77.060464&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING")
@@ -54,14 +56,21 @@ function Body () {
                 {/* {console.log(info.id)} */}
                 return (
                     
-                    <Link to={`/restaurants/${info.id}`} key={info.id}> <RestaurantCard 
+                    <Link to={`/restaurants/${info.id}`} key={info.id}>
+                    { info.aggregatedDiscountInfoV3.header ? <RestaurantCard 
                     key={info.id} 
                     imageAddress={baseImageURL + info.cloudinaryImageId}
                     name={info.name} 
                     rating={info.avgRating}
                     cuisines={info.cuisines}
                     location={ `${restaurant.info.locality} , ${restaurant.info.areaName}` }
-                />
+                />:  <ResCardWithPercentage key={info.id} 
+                    imageAddress={baseImageURL + info.cloudinaryImageId}
+                    name={info.name} 
+                    rating={info.avgRating}
+                    cuisines={info.cuisines}
+                    location={ `${restaurant.info.locality} , ${restaurant.info.areaName}` }/> }
+                     
                 </Link>  
                 )
                 })
