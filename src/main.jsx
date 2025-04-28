@@ -1,13 +1,20 @@
-import { StrictMode } from 'react'
+import { StrictMode , Suspense, lazy } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
-import  About  from './components/About.jsx'
+// import  About  from './components/About.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Contact } from './components/Contact.jsx'
 import { Error } from './components/Error.jsx'
 import Body from './components/Body.jsx'
 import {ResMenu} from './components/ResMenu.jsx'
+import {Provider} from 'react-redux'
+// import { Cart } from './components/Cart.jsx'
+import Store from './utils/Store.js'
+
+
+const About = lazy(()=> import('./components/About.jsx') )
+const Cart = lazy(()=> import('./components/Cart.jsx'))
 
 const appRouter = createBrowserRouter([
   {
@@ -22,7 +29,8 @@ const appRouter = createBrowserRouter([
       },
       {
         path : "/about" , 
-        element : <About/>,
+
+        element : <Suspense fallback={<div>Loading about compoment .............</div>}> <About/></Suspense>,
         errorElement:  <Error/>
       },
   
@@ -34,15 +42,22 @@ const appRouter = createBrowserRouter([
       {
         path:"/restaurants/:resId" ,
         element:<ResMenu />
+      },
+      {
+        path:'/cart',
+        element:(<Suspense fallback={<div>Loading about compoment .............</div>}> <Cart/></Suspense>)
+          
       }
     ]
   } 
 ])
 
 createRoot(document.getElementById('root')).render(
-    <RouterProvider router={appRouter}>
-    
-    </RouterProvider>
+  <StrictMode>
+    <Provider store={Store}>
+      <RouterProvider router={appRouter} />
+    </Provider>
+  </StrictMode>
 
 
 

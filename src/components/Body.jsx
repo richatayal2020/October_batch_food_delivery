@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { RestaurantCard  , withPercentagediscount} from './RestaurantCard'
+
 import { Link } from "react-router-dom";
 // import {resDetails} from "../utils/info"
-
+import { RestaurantCard } from "./RestaurantCard";
 
 function Body () {
    const [listOfRes , setListOfRes] = useState([])
@@ -12,14 +12,13 @@ function Body () {
     console.log(listOfRes)
    useEffect(()=>{fetchData()} , [])
 
-   const ResCardWithPercentage = withPercentagediscount(RestaurantCard)
+
 
    const fetchData = async () => {
         const data = await fetch ("https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.615962&lng=77.060464&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING")
         const json = await data.json()
-        // console.log(json.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+
         const restaurants = json.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants || []
-        
         setListOfRes(restaurants)
         // console.log(listOfRes.info)
         setAllRestaurants(restaurants) //  ADDED THIS 
@@ -57,21 +56,15 @@ function Body () {
                 return (
                     
                     <Link to={`/restaurants/${info.id}`} key={info.id}>
-                    { info.aggregatedDiscountInfoV3.header ? <RestaurantCard 
+                    <RestaurantCard 
                     key={info.id} 
                     imageAddress={baseImageURL + info.cloudinaryImageId}
                     name={info.name} 
                     rating={info.avgRating}
                     cuisines={info.cuisines}
                     location={ `${restaurant.info.locality} , ${restaurant.info.areaName}` }
-                />:  <ResCardWithPercentage key={info.id} 
-                    imageAddress={baseImageURL + info.cloudinaryImageId}
-                    name={info.name} 
-                    rating={info.avgRating}
-                    cuisines={info.cuisines}
-                    location={ `${restaurant.info.locality} , ${restaurant.info.areaName}` }/> }
-                     
-                </Link>  
+                />
+                </Link>
                 )
                 })
             }
